@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import FormAnagrafica from "./features/anagrafica/FormAnagrafica";
-import { anagraficaVuota, type Anagrafica } from "./types";
-import ListaAnagrafiche from "./features/anagrafica/ListaAnagrafiche";
-import { fetchAnagrafiche } from "./features/anagrafica/anagrafica.data";
+import { anagraficaVuota, type Anagrafica } from "../types";
+import { fetchAnagrafiche } from "../features/anagrafica/anagrafica.data";
+import FormAnagrafica from "../features/anagrafica/FormAnagrafica";
+import ListaAnagrafiche from "../features/anagrafica/ListaAnagrafiche";
 
 function App() {
 
