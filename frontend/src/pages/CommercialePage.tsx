@@ -67,40 +67,50 @@ export default function CommercialePage() {
 
     return (
         <div className="flex flex-col h-[calc(100vh-64px)] p-4 gap-4">
-            <DataGrid<Offerta>
-                titolo="Offerte"
-                colonne={colonneOfferte}
-                dati={offerte}
-                rigaSelezionata={offertaSelezionata}
-                onSeleziona={(riga) => {
-                    setOffertaSelezionata(riga)
-                    setIncaricoSelezionato(null)
-                }}
-                caricamento={caricamento}
-            />
+            <div className="flex-1">
+                <DataGrid<Offerta>
+                    titolo="Offerte"
+                    colonne={colonneOfferte}
+                    dati={offerte}
+                    rigaSelezionata={offertaSelezionata}
+                    onSeleziona={(riga) => {
+                        setOffertaSelezionata(riga)
+                        setIncaricoSelezionato(null)
+                    }}
+                    caricamento={caricamento}
+                />
+            </div>
 
-            <DataGrid<Incarico>
-                titolo="Incarichi"
-                colonne={colonneIncarichi}
-                dati={incarichiFiltrati}
-                rigaSelezionata={incaricoSelezionato}
-                onSeleziona={setIncaricoSelezionato}
-                caricamento={caricamento}
-            />
+            <div className="flex-1">
+                <DataGrid<Incarico>
+                    titolo="Incarichi"
+                    colonne={colonneIncarichi}
+                    dati={incarichiFiltrati}
+                    rigaSelezionata={incaricoSelezionato}
+                    onSeleziona={setIncaricoSelezionato}
+                    caricamento={caricamento}
+                />
+            </div>
 
-            <DataGrid<Articolo>
-                titolo="Articoli"
-                colonne={colonneArticoli}
-                dati={articoliFiltrati}
-                caricamento={caricamento}
-            />
+            <div className="flex-1 flex gap-4">
+                <div className="flex-1">
+                    <DataGrid<Articolo>
+                        titolo="Articoli"
+                        colonne={colonneArticoli}
+                        dati={articoliFiltrati}
+                        caricamento={caricamento}
+                    />
+                </div>
 
-            <DataGrid<PropostaFattura>
-                titolo="Proposte fattura"
-                colonne={colonneProposte}
-                dati={proposteFiltrate}
-                caricamento={caricamento}
-            />
+                <div className="flex-1">
+                    <DataGrid<PropostaFattura>
+                        titolo="Proposte fattura"
+                        colonne={colonneProposte}
+                        dati={proposteFiltrate}
+                        caricamento={caricamento}
+                    />
+                </div>
+            </div>
         </div>
     )
 }
