@@ -62,9 +62,9 @@ export default function DataGrid<T extends { id: number }>({
         <div className="flex flex-col border border-gray-300 rounded-lg overflow-hidden bg-white h-full">
 
             {/* RIGA 1: titolo + contatore */}
-            <div className="flex items-center gap-2 px-3 py-1 bg-gray-50 border-b border-gray-200">
+            <div className="flex items-center justify-center gap-2 px-3 py-1 bg-gray-50 border-b border-gray-200">
                 <span className="font-medium text-xs text-gray-700">{titolo}</span>
-                <span className="text-xs text-gray-400 ml-auto">{datiFiltrati.length} record</span>
+                <span className="text-xs bg-gray-200 text-gray-500 rounded-full px-2 py-0">{datiFiltrati.length}</span>
             </div>
 
             {/* RIGA 2: bottoni azioni */}
@@ -111,7 +111,7 @@ export default function DataGrid<T extends { id: number }>({
                                 {colonne.map((col) => (
                                     <th
                                         key={String(col.key)}
-                                        style={{ width: col.width ?? 150 }}
+                                        style={{ width: col.width ?? 150, height: 28 }}
                                         className="px-2 py-1 text-left border-r border-blue-600 last:border-r-0 cursor-pointer select-none"
                                         onClick={() => setColonnaFiltroAttiva(colonnaFiltroAttiva === String(col.key) ? null : String(col.key))}
                                     >
@@ -123,7 +123,12 @@ export default function DataGrid<T extends { id: number }>({
                                                 onChange={(e) => handleFiltro(String(col.key), e.target.value)}
                                                 onClick={(e) => e.stopPropagation()}
                                                 onBlur={() => setColonnaFiltroAttiva(null)}
-                                                className="w-full text-xs px-1 py-0 bg-blue-800 text-white border-b border-white outline-none placeholder-blue-300"
+                                                onKeyDown={(e) => {
+                                                    if (e.key === 'Escape') setColonnaFiltroAttiva(null)
+                                                    e.stopPropagation()
+                                                }}
+                                                style={{ width: (col.width ?? 150) - 16, height: 16 }}
+                                                className="text-xs px-1 py-0 bg-blue-800 text-white border-b border-white outline-none placeholder-blue-300 box-border"
                                                 placeholder={col.label}
                                             />
                                         ) : (
