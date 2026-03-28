@@ -4,28 +4,28 @@ import DataGrid, { type Colonna } from "../components/DataGrid"
 import { fetchArticoli, fetchIncarichi, fetchProposteFattura, fetchOfferte } from "../features/commerciale/commericale.data"
 
 const colonneOfferte: Colonna<Offerta>[] = [
-    { key: 'numero', label: 'Numero' },
-    { key: 'cliente', label: 'Cliente' },
-    { key: 'stato', label: 'Stato' },
-    { key: 'totale', label: 'Totale' },
+    { key: 'numero', label: 'Numero', width: 160 },
+    { key: 'cliente', label: 'Cliente', width: 200 },
+    { key: 'stato', label: 'Stato', width: 120 },
+    { key: 'totale', label: 'Totale', width: 120 },
 ]
 
 const colonneIncarichi: Colonna<Incarico>[] = [
-    { key: 'numero', label: 'Numero' },
-    { key: 'responsabile', label: 'Responsabile' },
-    { key: 'stato', label: 'Stato' },
+    { key: 'numero', label: 'Numero', width: 160 },
+    { key: 'responsabile', label: 'Responsabile', width: 200 },
+    { key: 'stato', label: 'Stato', width: 120 },
 ]
 
 const colonneArticoli: Colonna<Articolo>[] = [
-    { key: 'codice', label: 'Codice' },
-    { key: 'quantita', label: 'Quantità' },
-    { key: 'prezzoUnitario', label: 'Prezzo' },
+    { key: 'codice', label: 'Codice', width: 120 },
+    { key: 'quantita', label: 'Qtà', width: 80 },
+    { key: 'prezzoUnitario', label: 'Prezzo', width: 100 },
 ]
 
 const colonneProposte: Colonna<PropostaFattura>[] = [
-    { key: 'numero', label: 'Numero' },
-    { key: 'stato', label: 'Stato' },
-    { key: 'importoTotale', label: 'Importo' },
+    { key: 'numero', label: 'Numero', width: 160 },
+    { key: 'stato', label: 'Stato', width: 120 },
+    { key: 'importoTotale', label: 'Importo', width: 120 },
 ]
 
 export default function CommercialePage() {
@@ -69,6 +69,7 @@ export default function CommercialePage() {
     return (
         <div className="flex flex-col h-[calc(100vh-64px)] p-4 gap-4">
             <DataGrid<Offerta>
+                titolo="Offerte"
                 colonne={colonneOfferte}
                 dati={offerte}
                 rigaSelezionata={offertaSelezionata}
@@ -80,6 +81,7 @@ export default function CommercialePage() {
             />
 
             <DataGrid<Incarico>
+                titolo="Incarichi"
                 colonne={colonneIncarichi}
                 dati={incarichiFiltrati}
                 rigaSelezionata={incaricoSelezionato}
@@ -88,12 +90,14 @@ export default function CommercialePage() {
             />
 
             <DataGrid<Articolo>
+                titolo="Articoli"
                 colonne={colonneArticoli}
                 dati={articoliFiltrati}
                 caricamento={caricamento}
             />
 
             <DataGrid<PropostaFattura>
+                titolo="Proposte fattura"
                 colonne={colonneProposte}
                 dati={proposteFiltrate}
                 caricamento={caricamento}
