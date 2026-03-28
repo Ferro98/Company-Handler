@@ -58,7 +58,6 @@ export default function CommercialePage() {
             fetchArticoli(),
             fetchProposteFattura()
         ]).then(([o, i, a, p]) => {
-            console.log(o, i, a, p)
             setOfferte(o)
             setIncarichi(i)
             setArticoli(a)
