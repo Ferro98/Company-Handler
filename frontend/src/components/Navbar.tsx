@@ -44,7 +44,7 @@ export default function Navbar() {
                                 onClick={() => toggleMenu('commerciale', true)}
                                 className="w-full text-left px-4 py-2 hover:bg-gray-700"
                             >
-                                Settore Commerciale ▾
+                                Archivio Commerciale ▾
                             </button>
                             {sottomenuAperto === 'commerciale' && (
                                 <div className="absolute left-full top-0 bg-gray-700 rounded shadow-lg min-w-48 z-50">
@@ -60,12 +60,18 @@ export default function Navbar() {
                                 </div>
                             )}
                         </div>
-                        <Link to="/settore-operativo" className="block px-4 py-2 hover:bg-gray-700">
-                            Settore Operativo
-                        </Link>
                     </div>
                 )}
+
+
             </div>
+            <Link to="/commerciale" className="block px-4 py-2 hover:bg-gray-700">
+                Settore Commerciale
+            </Link>
+
+            <Link to="/settore-operativo" className="block px-4 py-2 hover:bg-gray-700">
+                Settore Operativo
+            </Link>
         </nav>
     )
 }
