@@ -16,7 +16,7 @@ type Props<T> = {
     titolo: string
     colonne: Colonna<T>[]
     dati: T[]
-    onSeleziona?: (riga: T) => void
+    onSeleziona?: (riga: T | null) => void
     rigaSelezionata?: T | null
     caricamento?: boolean
     onInserisci?: () => void
@@ -62,9 +62,9 @@ export default function DataGrid<T extends { id: number }>({
         <div className="flex flex-col border border-gray-300 rounded-lg overflow-hidden bg-white h-full">
 
             {/* RIGA 1: titolo + contatore */}
-            <div className="flex items-center justify-center gap-2 px-3 py-1 bg-gray-50 border-b border-gray-200">
-                <span className="font-medium text-xs text-gray-700">{titolo}</span>
-                <span className="text-xs bg-gray-200 text-gray-500 rounded-full px-2 py-0">{datiFiltrati.length}</span>
+            <div className="flex items-center justify-center gap-2 px-3 py-1 bg-gray-700 border-b border-gray-600">
+                <span className="font-semibold text-xs text-white tracking-wide uppercase">{titolo}</span>
+                <span className="text-xs bg-gray-500 text-white rounded-full px-2">{datiFiltrati.length}</span>
             </div>
 
             {/* RIGA 2: bottoni azioni */}
@@ -107,12 +107,12 @@ export default function DataGrid<T extends { id: number }>({
                     <table className="text-sm border-collapse" style={{ tableLayout: 'fixed', width: colonne.reduce((acc, c) => acc + (c.width ?? 150), 0) }}>
                         {/* HEADER */}
                         <thead className="sticky top-0 z-10">
-                            <tr className="bg-blue-700 text-white">
+                            <tr className="bg-gray-600 text-white">
                                 {colonne.map((col) => (
                                     <th
                                         key={String(col.key)}
                                         style={{ width: col.width ?? 150, height: 28 }}
-                                        className="px-2 py-1 text-left border-r border-blue-600 last:border-r-0 cursor-pointer select-none"
+                                        className="px-2 border-r border-gray-500 last:border-r-0 cursor-pointer select-none align-middle"
                                         onClick={() => setColonnaFiltroAttiva(colonnaFiltroAttiva === String(col.key) ? null : String(col.key))}
                                     >
                                         {colonnaFiltroAttiva === String(col.key) ? (
@@ -128,7 +128,7 @@ export default function DataGrid<T extends { id: number }>({
                                                     e.stopPropagation()
                                                 }}
                                                 style={{ width: (col.width ?? 150) - 16, height: 16 }}
-                                                className="text-xs px-1 py-0 bg-blue-800 text-white border-b border-white outline-none placeholder-blue-300 box-border"
+                                                className="w-full text-xs px-1 py-0 bg-gray-800 text-white border-b border-white outline-none placeholder-gray-400 box-border"
                                                 placeholder={col.label}
                                             />
                                         ) : (
@@ -151,7 +151,13 @@ export default function DataGrid<T extends { id: number }>({
                                 return (
                                     <tr
                                         key={riga.id}
-                                        onClick={() => onSeleziona?.(riga)}
+                                        onClick={() => {
+                                            if (rigaSelezionata && (rigaSelezionata as any).id === riga.id) {
+                                                onSeleziona?.(null as any)  // deseleziona
+                                            } else {
+                                                onSeleziona?.(riga)
+                                            }
+                                        }}
                                         className={`cursor-pointer border-b border-gray-100 
                                             ${isSelezionata ? 'bg-blue-100 font-medium' : idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
                                             hover:bg-blue-50`}

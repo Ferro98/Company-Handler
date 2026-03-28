@@ -45,11 +45,15 @@ export default function CommercialePage() {
 
     const articoliFiltrati = incaricoSelezionato
         ? articoli.filter(a => a.incaricoId === incaricoSelezionato.id)
-        : articoli
+        : offertaSelezionata
+            ? articoli.filter(a => incarichiFiltrati.some(i => i.id === a.incaricoId))
+            : articoli
 
     const proposteFiltrate = incaricoSelezionato
         ? proposte.filter(p => p.incaricoId === incaricoSelezionato.id)
-        : proposte
+        : offertaSelezionata
+            ? proposte.filter(p => incarichiFiltrati.some(i => i.id === p.incaricoId))
+            : proposte
 
     useEffect(() => {
         Promise.all([
