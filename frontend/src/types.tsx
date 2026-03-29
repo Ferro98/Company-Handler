@@ -41,3 +41,13 @@ export type PropostaFattura = {
     stato: 'BOZZA' | 'EMESSA' | 'PAGATA' | 'ANNULLATA'
     importoTotale: number
 }
+
+export type FieldConfig = {
+    key: string
+    label: string
+    type: 'text' | 'number' | 'select' | 'date' | 'checkbox'
+    required?: boolean
+    readonlyOn?: ('inserisci' | 'modifica' | 'visualizza')[]
+    showOn?: ('inserisci' | 'modifica' | 'visualizza')[]
+    options?: { label: string; value: string }[]  // solo per select
+}
