@@ -10,6 +10,8 @@ import {
 } from '@/components/ui/dialog'
 import OffertaForm from '@/features/commerciale/offerta/OffertaForm'
 import IncaricoForm from "@/features/commerciale/incarico/IncaricoForm"
+import ArticoloForm from "@/features/commerciale/articolo/ArticoloForm"
+import PropostaFatturaForm from "@/features/commerciale/proposta/PropostaFatturaForm"
 
 type ModoDialog = 'inserisci' | 'modifica' | 'visualizza' | null
 
@@ -175,6 +177,7 @@ export default function CommercialePage() {
                     />
                 </DialogContent>
             </Dialog>
+
             <Dialog open={dialogIncarico !== null} onOpenChange={(open) => { if (!open) setDialogIncarico(null) }}>
                 <DialogContent className="max-w-lg">
                     <DialogHeader>
@@ -193,18 +196,26 @@ export default function CommercialePage() {
                     />
                 </DialogContent>
             </Dialog>
+
             <Dialog open={dialogArticolo !== null} onOpenChange={(open) => { if (!open) setDialogArticolo(null) }}>
                 <DialogContent className="max-w-lg">
                     <DialogHeader>
                         <DialogTitle>
-                            {dialogArticolo === 'inserisci' ? 'Nuova Articolo' :
+                            {dialogArticolo === 'inserisci' ? 'Nuovo Articolo' :
                                 dialogArticolo === 'modifica' ? 'Modifica Articolo' :
                                     'Dettaglio Articolo'}
                         </DialogTitle>
                     </DialogHeader>
-                    <p className="text-sm text-gray-500">Form Articolo ({dialogArticolo})</p>
+                    <ArticoloForm
+                        modo={dialogArticolo!}
+                        dati={dialogArticolo === 'inserisci' ? undefined : articoloSelezionato ?? undefined}
+                        incarico={incarichi.find(i => i.id === articoloSelezionato?.incaricoId)}
+                        onChiudi={() => setDialogArticolo(null)}
+                        onSalva={(dati) => console.log('salva articolo', dati)}
+                    />
                 </DialogContent>
             </Dialog>
+
             <Dialog open={dialogProposta !== null} onOpenChange={(open) => { if (!open) setDialogProposta(null) }}>
                 <DialogContent className="max-w-lg">
                     <DialogHeader>
@@ -214,7 +225,13 @@ export default function CommercialePage() {
                                     'Dettaglio Proposta'}
                         </DialogTitle>
                     </DialogHeader>
-                    <p className="text-sm text-gray-500">Form Proposta ({dialogProposta})</p>
+                    <PropostaFatturaForm
+                        modo={dialogProposta!}
+                        dati={dialogProposta === 'inserisci' ? undefined : propostaSelezionata ?? undefined}
+                        incarico={incarichi.find(i => i.id === propostaSelezionata?.incaricoId)}
+                        onChiudi={() => setDialogProposta(null)}
+                        onSalva={(dati) => console.log('salva proposta', dati)}
+                    />
                 </DialogContent>
             </Dialog>
         </div>
