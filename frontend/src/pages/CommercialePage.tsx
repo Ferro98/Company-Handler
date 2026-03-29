@@ -84,7 +84,7 @@ export default function CommercialePage() {
     }, [])
 
     return (
-        <div className="flex flex-col h-[calc(100vh-64px)] p-4 gap-4">
+        <div className="flex flex-col h-[calc(100vh-48px-32px)] gap-4">
             <div className="flex-1">
                 <DataGrid<Offerta>
                     titolo="Offerte"

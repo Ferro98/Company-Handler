@@ -71,8 +71,8 @@ export default function DataGrid<T extends { id: number }>({
 
             {/* RIGA 2: bottoni azioni */}
             <div className="flex items-center gap-1 px-2 py-0.5 bg-slate-50 border-b border-slate-200">
-                <Button size="icon" variant="default" title="Inserisci" onClick={onInserisci} className="h-6 w-6">
-                    <Plus size={12} />
+                <Button size="icon" variant="outline" title="Inserisci" onClick={onInserisci} className="h-6 w-6 border-slate-400 hover:bg-slate-100">
+                    <Plus size={12} className="text-slate-600" />
                 </Button>
                 <Button size="icon" variant="outline" title="Visualizza" disabled={!hasSelezione} onClick={() => selezionata && onVisualizza?.(selezionata)} className="h-6 w-6">
                     <Eye size={12} />

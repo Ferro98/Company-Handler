@@ -11,16 +11,20 @@ import CommercialePage from './pages/CommercialePage'
 function App() {
     return (
         <BrowserRouter>
-            <Navbar />
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/anagrafica" element={<AnagraficaPage />} />
-                <Route path="/listino-articoli" element={<ListinoArticoliPage />} />
-                <Route path="/tipi-documento-offerta" element={<TipiDocumentoOffertaPage />} />
-                <Route path="/tipi-documento-incarico" element={<TipiDocumentoIncaricoPage />} />
-                <Route path="/settore-operativo" element={<SettoreOperativoPage />} />
-                <Route path="/commerciale" element={<CommercialePage />} />
-            </Routes>
+            <div className="min-h-screen bg-slate-100 flex flex-col">
+                <Navbar />
+                <main className="flex-1 p-4">
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/anagrafica" element={<AnagraficaPage />} />
+                        <Route path="/listino-articoli" element={<ListinoArticoliPage />} />
+                        <Route path="/tipi-documento-offerta" element={<TipiDocumentoOffertaPage />} />
+                        <Route path="/tipi-documento-incarico" element={<TipiDocumentoIncaricoPage />} />
+                        <Route path="/settore-operativo" element={<SettoreOperativoPage />} />
+                        <Route path="/commerciale" element={<CommercialePage />} />
+                    </Routes>
+                </main>
+            </div>
         </BrowserRouter>
     )
 }

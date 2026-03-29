@@ -13,8 +13,8 @@ export default function Navbar() {
                 setSottomenuAperto(null)
             }
         }
-        document.addEventListener('mousedown', handleClickFuori)
-        return () => document.removeEventListener('mousedown', handleClickFuori)
+        document.addEventListener('click', handleClickFuori, true)  // true = capture phase
+        return () => document.removeEventListener('click', handleClickFuori, true)
     }, [])
 
     function toggleMenu(nome: string, sottomenu?: boolean) {
@@ -37,10 +37,10 @@ export default function Navbar() {
     }
 
     return (
-        <nav ref={navRef} className="bg-gray-900 text-white px-6 py-3 flex items-center gap-6 relative">
+        <nav ref={navRef} className="bg-slate-900 text-white px-6 h-12 flex items-center gap-1 relative shadow-md">
             <div className="relative">
-                <button onClick={() => toggleMenu('archivio')} className="text-sm hover:text-gray-300 transition-colors">
-                    Archivio ▾
+                <button onClick={() => toggleMenu('archivio')} className="h-12 px-4 text-sm hover:bg-slate-700 transition-colors flex items-center gap-1">
+                    Archivio <span className="text-xs opacity-60">▾</span>
                 </button>
                 {menuAperto === 'archivio' && (
                     <div className="absolute top-full left-0 bg-gray-800 mt-1 rounded shadow-lg min-w-48 z-50">
@@ -49,7 +49,7 @@ export default function Navbar() {
                         </Link>
                         <div className="relative">
                             <button onClick={() => toggleMenu('commerciale', true)} className="w-full text-left px-4 py-2 hover:bg-gray-700 text-sm">
-                                Archivio Commerciale ▾
+                                Archivio Commerciale <span className="text-xs opacity-60">▾</span>
                             </button>
                             {sottomenuAperto === 'commerciale' && (
                                 <div className="absolute left-full top-0 bg-gray-700 rounded shadow-lg min-w-48 z-50">
@@ -63,10 +63,15 @@ export default function Navbar() {
                 )}
             </div>
 
-            <Link to="/commerciale" onClick={chiudiTutto} className="text-sm hover:text-gray-300 transition-colors">
+            <div className="w-px h-5 bg-slate-600 mx-1" />
+
+            <Link to="/commerciale" onClick={chiudiTutto} className="h-12 px-4 text-sm hover:bg-slate-700 transition-colors flex items-center">
                 Settore Commerciale
             </Link>
-            <Link to="/settore-operativo" onClick={chiudiTutto} className="text-sm hover:text-gray-300 transition-colors">
+
+            <div className="w-px h-5 bg-slate-600 mx-1" />
+
+            <Link to="/settore-operativo" onClick={chiudiTutto} className="h-12 px-4 text-sm hover:bg-slate-700 transition-colors flex items-center">
                 Settore Operativo
             </Link>
         </nav>
