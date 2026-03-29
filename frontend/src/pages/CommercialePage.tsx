@@ -8,6 +8,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog'
+import OffertaForm from '@/features/commerciale/offerta/OffertaForm'
 
 type ModoDialog = 'inserisci' | 'modifica' | 'visualizza' | null
 
@@ -151,14 +152,12 @@ export default function CommercialePage() {
             </div>
             <Dialog open={dialogOfferta !== null} onOpenChange={(open) => { if (!open) setDialogOfferta(null) }}>
                 <DialogContent className="max-w-lg">
-                    <DialogHeader>
-                        <DialogTitle>
-                            {dialogOfferta === 'inserisci' ? 'Nuova Offerta' :
-                                dialogOfferta === 'modifica' ? 'Modifica Offerta' :
-                                    'Dettaglio Offerta'}
-                        </DialogTitle>
-                    </DialogHeader>
-                    <p className="text-sm text-gray-500">Form offerta ({dialogOfferta})</p>
+                    <OffertaForm
+                        modo={dialogOfferta!}
+                        dati={offertaSelezionata ?? undefined}
+                        onChiudi={() => setDialogOfferta(null)}
+                        onSalva={(dati) => console.log('salva', dati)}
+                    />
                 </DialogContent>
             </Dialog>
             <Dialog open={dialogIncarico !== null} onOpenChange={(open) => { if (!open) setDialogIncarico(null) }}>
