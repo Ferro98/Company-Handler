@@ -2,7 +2,12 @@ import { useEffect, useState } from "react"
 import type { Articolo, Incarico, Offerta, PropostaFattura } from "../types"
 import DataGrid, { type Colonna } from "../components/DataGrid"
 import { fetchArticoli, fetchIncarichi, fetchProposteFattura, fetchOfferte } from "../features/commerciale/commericale.data"
-import Dialog from "../components/Dialog"
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+} from '@/components/ui/dialog'
 
 type ModoDialog = 'inserisci' | 'modifica' | 'visualizza' | null
 
@@ -144,53 +149,53 @@ export default function CommercialePage() {
                     />
                 </div>
             </div>
-            <Dialog
-                titolo={
-                    dialogOfferta === 'inserisci' ? 'Nuova Offerta' :
-                        dialogOfferta === 'modifica' ? 'Modifica Offerta' :
-                            'Dettaglio Offerta'
-                }
-                aperto={dialogOfferta !== null}
-                onChiudi={() => setDialogOfferta(null)}
-                larghezza="lg"
-            >
-                <p className="text-sm text-gray-500">Form Offerta ({dialogOfferta})</p>
+            <Dialog open={dialogOfferta !== null} onOpenChange={(open) => { if (!open) setDialogOfferta(null) }}>
+                <DialogContent className="max-w-lg">
+                    <DialogHeader>
+                        <DialogTitle>
+                            {dialogOfferta === 'inserisci' ? 'Nuova Offerta' :
+                                dialogOfferta === 'modifica' ? 'Modifica Offerta' :
+                                    'Dettaglio Offerta'}
+                        </DialogTitle>
+                    </DialogHeader>
+                    <p className="text-sm text-gray-500">Form offerta ({dialogOfferta})</p>
+                </DialogContent>
             </Dialog>
-            <Dialog
-                titolo={
-                    dialogIncarico === 'inserisci' ? 'Nuova Incarico' :
-                        dialogIncarico === 'modifica' ? 'Modifica Incarico' :
-                            'Dettaglio Offerta'
-                }
-                aperto={dialogIncarico !== null}
-                onChiudi={() => setDialogIncarico(null)}
-                larghezza="lg"
-            >
-                <p className="text-sm text-gray-500">Form Incarico ({dialogIncarico})</p>
+            <Dialog open={dialogIncarico !== null} onOpenChange={(open) => { if (!open) setDialogIncarico(null) }}>
+                <DialogContent className="max-w-lg">
+                    <DialogHeader>
+                        <DialogTitle>
+                            {dialogIncarico === 'inserisci' ? 'Nuova Incarico' :
+                                dialogIncarico === 'modifica' ? 'Modifica Incarico' :
+                                    'Dettaglio Incarico'}
+                        </DialogTitle>
+                    </DialogHeader>
+                    <p className="text-sm text-gray-500">Form Incarico ({dialogIncarico})</p>
+                </DialogContent>
             </Dialog>
-            <Dialog
-                titolo={
-                    dialogArticolo === 'inserisci' ? 'Nuova Articolo' :
-                        dialogArticolo === 'modifica' ? 'Modifica Articolo' :
-                            'Dettaglio Articolo'
-                }
-                aperto={dialogArticolo !== null}
-                onChiudi={() => setDialogArticolo(null)}
-                larghezza="lg"
-            >
-                <p className="text-sm text-gray-500">Form Articolo ({dialogArticolo})</p>
+            <Dialog open={dialogArticolo !== null} onOpenChange={(open) => { if (!open) setDialogArticolo(null) }}>
+                <DialogContent className="max-w-lg">
+                    <DialogHeader>
+                        <DialogTitle>
+                            {dialogArticolo === 'inserisci' ? 'Nuova Articolo' :
+                                dialogArticolo === 'modifica' ? 'Modifica Articolo' :
+                                    'Dettaglio Articolo'}
+                        </DialogTitle>
+                    </DialogHeader>
+                    <p className="text-sm text-gray-500">Form Articolo ({dialogArticolo})</p>
+                </DialogContent>
             </Dialog>
-            <Dialog
-                titolo={
-                    dialogProposta === 'inserisci' ? 'Nuova Proposta' :
-                        dialogProposta === 'modifica' ? 'Modifica Proposta' :
-                            'Dettaglio Proposta'
-                }
-                aperto={dialogProposta !== null}
-                onChiudi={() => setDialogProposta(null)}
-                larghezza="lg"
-            >
-                <p className="text-sm text-gray-500">Form Proposta ({dialogProposta})</p>
+            <Dialog open={dialogProposta !== null} onOpenChange={(open) => { if (!open) setDialogProposta(null) }}>
+                <DialogContent className="max-w-lg">
+                    <DialogHeader>
+                        <DialogTitle>
+                            {dialogProposta === 'inserisci' ? 'Nuova Proposta' :
+                                dialogProposta === 'modifica' ? 'Modifica Proposta' :
+                                    'Dettaglio Proposta'}
+                        </DialogTitle>
+                    </DialogHeader>
+                    <p className="text-sm text-gray-500">Form Proposta ({dialogProposta})</p>
+                </DialogContent>
             </Dialog>
         </div>
     )

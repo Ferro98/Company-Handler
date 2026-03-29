@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { Plus, Eye, Pencil, Trash2, MoreHorizontal, Filter } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 
 export type Colonna<T> = {
     key: keyof T
@@ -62,34 +64,34 @@ export default function DataGrid<T extends { id: number }>({
         <div className="flex flex-col border border-gray-300 rounded-lg overflow-hidden bg-white h-full">
 
             {/* RIGA 1: titolo + contatore */}
-            <div className="flex items-center justify-center gap-2 px-3 py-1 bg-gray-700 border-b border-gray-600">
-                <span className="font-semibold text-xs text-white tracking-wide uppercase">{titolo}</span>
-                <span className="text-xs bg-gray-500 text-white rounded-full px-2">{datiFiltrati.length}</span>
+            <div className="flex items-center justify-center gap-2 px-3 py-1 bg-slate-700 border-b border-slate-600">
+                <span className="text-xs font-semibold text-white uppercase tracking-wide">{titolo}</span>
+                <Badge variant="secondary" className="text-xs px-1.5 py-0">{datiFiltrati.length}</Badge>
             </div>
 
             {/* RIGA 2: bottoni azioni */}
-            <div className="flex items-center gap-1 px-2 py-0.5 bg-gray-50 border-b border-gray-300">
-                <button title="Inserisci" onClick={onInserisci} className="p-1 rounded bg-blue-600 text-white hover:bg-blue-700">
+            <div className="flex items-center gap-1 px-2 py-0.5 bg-slate-50 border-b border-slate-200">
+                <Button size="icon" variant="default" title="Inserisci" onClick={onInserisci} className="h-6 w-6">
                     <Plus size={12} />
-                </button>
-                <button title="Visualizza" disabled={!hasSelezione} onClick={() => selezionata && onVisualizza?.(selezionata)} className="p-1 rounded border border-gray-300 bg-white hover:bg-gray-100 disabled:opacity-40">
+                </Button>
+                <Button size="icon" variant="outline" title="Visualizza" disabled={!hasSelezione} onClick={() => selezionata && onVisualizza?.(selezionata)} className="h-6 w-6">
                     <Eye size={12} />
-                </button>
-                <button title="Modifica" disabled={!hasSelezione} onClick={() => selezionata && onModifica?.(selezionata)} className="p-1 rounded border border-gray-300 bg-white hover:bg-gray-100 disabled:opacity-40">
+                </Button>
+                <Button size="icon" variant="outline" title="Modifica" disabled={!hasSelezione} onClick={() => selezionata && onModifica?.(selezionata)} className="h-6 w-6">
                     <Pencil size={12} />
-                </button>
-                <button title="Elimina" disabled={!hasSelezione} onClick={() => selezionata && onElimina?.(selezionata)} className="p-1 rounded border border-red-300 text-red-600 bg-white hover:bg-red-50 disabled:opacity-40">
+                </Button>
+                <Button size="icon" variant="destructive" title="Elimina" disabled={!hasSelezione} onClick={() => selezionata && onElimina?.(selezionata)} className="h-6 w-6">
                     <Trash2 size={12} />
-                </button>
+                </Button>
                 {operazioniExtra && operazioniExtra.length > 0 && (
                     <div className="relative">
-                        <button title="Altre operazioni" disabled={!hasSelezione} onClick={() => setMenuApertoId(menuApertoId === -1 ? null : -1)} className="p-1 rounded border border-gray-300 bg-white hover:bg-gray-100 disabled:opacity-40">
+                        <Button size="icon" variant="outline" title="Altre operazioni" disabled={!hasSelezione} onClick={() => setMenuApertoId(menuApertoId === -1 ? null : -1)} className="h-6 w-6">
                             <MoreHorizontal size={12} />
-                        </button>
+                        </Button>
                         {menuApertoId === -1 && hasSelezione && (
-                            <div className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded shadow-lg z-10 min-w-40">
+                            <div className="absolute right-0 top-full mt-1 bg-white border border-slate-200 rounded shadow-lg z-10 min-w-40">
                                 {operazioniExtra.map((op) => (
-                                    <button key={op.label} onClick={() => { selezionata && op.onClick(selezionata); setMenuApertoId(null) }} className="block w-full text-left px-4 py-2 text-xs hover:bg-gray-50">
+                                    <button key={op.label} onClick={() => { selezionata && op.onClick(selezionata); setMenuApertoId(null) }} className="block w-full text-left px-4 py-2 text-xs hover:bg-slate-50">
                                         {op.label}
                                     </button>
                                 ))}
